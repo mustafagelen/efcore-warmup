@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36811.4 d17.14
+VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityRules", "EntityRules\EntityRules.csproj", "{0D987C60-21DC-4AF7-B11A-69D3084BF2EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateProducts", "UpdateProducts\UpdateProducts.csproj", "{75AB70AD-873B-4841-9278-A493623EC951}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0D987C60-21DC-4AF7-B11A-69D3084BF2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D987C60-21DC-4AF7-B11A-69D3084BF2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D987C60-21DC-4AF7-B11A-69D3084BF2EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75AB70AD-873B-4841-9278-A493623EC951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75AB70AD-873B-4841-9278-A493623EC951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75AB70AD-873B-4841-9278-A493623EC951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75AB70AD-873B-4841-9278-A493623EC951}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
