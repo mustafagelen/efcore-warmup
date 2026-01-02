@@ -149,7 +149,6 @@ var productsPieces = await dbContext.Products.Include(p => p.Pieces).SelectMany(
 
 
 #endregion
-
 #region GroubBy Kullanımı ve Foreach
 var datas = await dbContext.Products.GroupBy(p => p.ProductName.Contains("Iphone")).Select(group => new
 {
