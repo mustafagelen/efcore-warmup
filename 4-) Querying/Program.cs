@@ -62,12 +62,30 @@ foreach (Product product in productQuery)
 #endregion
 
 //OrderBy
-var products= await dbContext.Products.OrderBy(p=>p.ProductName).ToListAsync();
-var productsQuery= await (from product in dbContext.Products
-                          where product.Id > 2 && product.Id < 5 && product.ProductName.Contains("a")
-                          orderby product.ProductName
-                          select product).ToListAsync();
+var products = await dbContext.Products.OrderBy(p => p.ProductName).ToListAsync();
+var productsQuery = await (from product in dbContext.Products
+                           where product.Id > 2 && product.Id < 5 && product.ProductName.Contains("a")
+                           orderby product.ProductName
+                           select product).ToListAsync();
 
+#endregion
+#region Tekil veri getiren sorgular
+//Single vs SingleOrDefault
+//Yapılan sorguda save ve sadece tek bir verinin gelmesini amaçlıyorsa Single ya da SingleOrDefault fonksiyonları kullanılabilir. Default olarak null dönecek
+var productsSingle = await dbContext.Products.SingleAsync(p => p.Id == productId);
+var productsSingleOrDefault = await dbContext.Products.SingleOrDefaultAsync(p => p.Id == productId);
+
+//First vs FirstOrDefault
+var productsFirst = await dbContext.Products.FirstAsync(p => p.Id == 55);
+var productsFirstOrDefault= await dbContext.Products.FirstOrDefaultAsync(p => p.Id == 55);
+
+//Find
+//Primary key columnu kullanarak tekil veri getiren sorgularda kullanılır. Repository Design Pattern'de sıkça kullanılır.
+var productFind = await dbContext.Products.FindAsync(1);
+
+//Last vs LastOrDefault
+//Gelen verilerin sonuncusunu getirir.
+var productsLast = await dbContext.Products.LastAsync(p => p.Id > 2);
 #endregion
 
 
