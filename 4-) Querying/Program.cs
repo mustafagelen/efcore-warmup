@@ -134,7 +134,7 @@ var productsNames = await dbContext.Products.Select(p => new Product
 }).ToListAsync();
 
 //2. Select fonksiyonu gelen veriler farklı türlerde karşılamamızı sağlar "T"
-var productsNamesGeneric = await dbContext.Products.Select(p => new 
+var productsNamesGeneric = await dbContext.Products.Select(p => new
 {
     Id = p.Id,
     Description = p.Description
@@ -146,6 +146,36 @@ var productsPieces = await dbContext.Products.Include(p => p.Pieces).SelectMany(
     ProductName = p.ProductName,
     PieceName = k.PieceName
 }).ToListAsync();
+
+
+#endregion
+
+#region GroubBy Kullanımı ve Foreach
+var datas = await dbContext.Products.GroupBy(p => p.ProductName.Contains("Iphone")).Select(group => new
+{
+    Count = group.Count(),
+    ProductName = group.Key,
+}).ToListAsync();
+
+var datasQuery = await (from product in dbContext.Products
+                        group product by product.ProductName
+                 into gr
+                        select new
+                        {
+                            ProductName = gr.Key,
+                            Count = gr.Count(),
+                        }).ToListAsync();
+
+//Foreach sorgulama neticesinde elde edilen koleksiyonel veriler üzerinde iterasyonel olarak dönmemizi ve teker teker verileri elde edip işlemler yapabilmemizi sağlayan bir fonksiyondur.
+foreach (var product in datas)
+{
+    Console.WriteLine(product.Count);
+}
+
+datas.ForEach(p =>
+{
+    Console.WriteLine("test");
+});
 
 
 #endregion
