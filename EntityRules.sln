@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7-) SavingRelatedData", "7-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9-) BackingFields", "9-) BackingFields\9-) BackingFields.csproj", "{B8597EEA-9AEE-447E-A469-D4907EE9B4EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-) AsNoTracking", "6-) AsNoTracking\6-) AsNoTracking.csproj", "{71ACAFE6-72A8-4A96-8FB3-8321190EE7AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{B8597EEA-9AEE-447E-A469-D4907EE9B4EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8597EEA-9AEE-447E-A469-D4907EE9B4EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8597EEA-9AEE-447E-A469-D4907EE9B4EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71ACAFE6-72A8-4A96-8FB3-8321190EE7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71ACAFE6-72A8-4A96-8FB3-8321190EE7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71ACAFE6-72A8-4A96-8FB3-8321190EE7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71ACAFE6-72A8-4A96-8FB3-8321190EE7AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
