@@ -31,8 +31,15 @@ blog.Posts = new HashSet<Post>()
     new Post() { Content = "Blazor ile WebAssembly" }
 };
 
+//Foreign Key ile ekleme
+Post post1 = new() { Content = "Veri Analizi", BlogId = blog.Id };
+
 await dbContext.Blogs.AddAsync(blog);
 await dbContext.SaveChangesAsync();
+
+//Many to Many İlişki Ekleme
+// Eğer default convention kullanılıyorsa many to many 
+
 
 
 
