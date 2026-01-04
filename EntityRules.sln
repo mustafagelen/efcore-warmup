@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9-) BackingFields", "9-) Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-) AsNoTracking", "6-) AsNoTracking\6-) AsNoTracking.csproj", "{71ACAFE6-72A8-4A96-8FB3-8321190EE7AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10-) ShadowProperty", "10-) ShadowProperty\10-) ShadowProperty.csproj", "{75B19495-7285-40A6-8DD8-533F3EE39A61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{71ACAFE6-72A8-4A96-8FB3-8321190EE7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71ACAFE6-72A8-4A96-8FB3-8321190EE7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71ACAFE6-72A8-4A96-8FB3-8321190EE7AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75B19495-7285-40A6-8DD8-533F3EE39A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75B19495-7285-40A6-8DD8-533F3EE39A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75B19495-7285-40A6-8DD8-533F3EE39A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75B19495-7285-40A6-8DD8-533F3EE39A61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
