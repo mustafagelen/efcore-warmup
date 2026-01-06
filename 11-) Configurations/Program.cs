@@ -31,8 +31,21 @@ Console.WriteLine(nameof(Blog));
 //Versiyon kontrolü için kullanılır. Genellikle concurrency işlemlerinde kullanılır.
 //Veriye özel versiyon mantığı sağlar.
 #endregion
-
-
+#region Required - IsRequired
+//Bir property'nin null olamayacağını belirtmek için kullanılır.
+#endregion
+#region Precision - HasPrecision
+//Küsüratlı sayılar için toplam basamak sayısı ve ondalık basamak sayısını belirlemek için kullanılır.
+#endregion
+#region Comment - HasComment
+//Tablo veya kolon için açıklama eklemek için kullanılır
+#endregion
+#region Concurrency - IsConcurrencyToken
+//Concurrency kontrolü için kullanılır. Bir property'nin concurrency token olarak işaretlenmesini sağlar. Böylece bu property'nin değeri değiştiğinde EF Core, veritabanındaki değeri kontrol eder ve çakışma durumunda bir istisna fırlatır.
+#endregion
+#region InverseProperty
+//Entityler arasından birden fazla ilişki varsa eğer bu ilişkilerin hangi navigation property'leri üzerinden kurulacağını belirtmek için kullanılır.
+#endregion
 #endregion
 
 
@@ -45,7 +58,7 @@ public class ETicaretDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
-        optionsBuilder.UseSqlServer("Server=localhost;Database=Shadow;User Id=sa;Password=Mg123456;TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer("Server=localhost;Database=Config;User Id=sa;Password=Mg123456;TrustServerCertificate=True;");
         //Provider
         //Connection String
         //Layz Loading
@@ -69,17 +82,26 @@ public class ETicaretDbContext : DbContext
         #region HasKey
         modelBuilder.Entity<Blog>().HasKey(b => b.KeyKolonu);
         #endregion
-
         #region Ignore
         modelBuilder.Entity<Blog>().Ignore(b => b.NotMappedProperty);
         #endregion
-
         #region IsRowVersion
         modelBuilder.Entity<Blog>().Property(b => b.RowVersion).IsRowVersion();
         #endregion
-
-        #region IsRowVersion
-        modelBuilder.Entity<Blog>().Property(b => b.RowVersion).IsRowVersion();
+        #region IsRequired
+        modelBuilder.Entity<Blog>().Property(b => b.Description).IsRequired(false);
+        #endregion
+        #region HasMaxLength
+        modelBuilder.Entity<Blog>().Property(b => b.Title).HasMaxLength(200);
+        #endregion
+        #region HasPrecision
+        modelBuilder.Entity<Blog>().Property(b => b.Title).HasPrecision(18, 2);
+        #endregion
+        #region HasComment
+        modelBuilder.Entity<Blog>().Property(b => b.Title).HasComment("Blog başlığı");
+        #endregion
+        #region ConcurrencyToken
+        modelBuilder.Entity<Blog>().Property(b => b.Concurency).IsConcurrencyToken();
         #endregion
 
     }
@@ -92,11 +114,16 @@ public class Blog
     [Key]
     public int KeyKolonu { get; set; }
     public string Title { get; set; }
+    //[InverseProperty(nameof(Post.Id))]
     public ICollection<Post> Posts { get; set; }
     [NotMapped]
     public string NotMappedProperty { get; set; }
     [Timestamp]
-    public  byte[] RowVersion { get; set; }
+    public byte[] RowVersion { get; set; }
+    [Comment("Açıklama alanı")]
+    public string? Description { get; set; }
+    [ConcurrencyCheck]
+    public  int Concurency { get; set; }
 }
 
 public class Post
@@ -104,7 +131,7 @@ public class Post
     public int Id { get; set; }
     public string Content { get; set; }
 
-    public  int BlogId { get; set; }
+    public int BlogId { get; set; }
 
     public Blog Blog { get; set; }
 }
