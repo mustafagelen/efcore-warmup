@@ -140,6 +140,18 @@ public class ETicaretDbContext : DbContext
         #region HasDiscriminator
         //HasDiscriminator metodu, tablo başına sınıf hiyerarşisi (Table-per-Hierarchy, TPH) stratejisini kullanarak kalıtım yapılan entity'ler için ayrımcı (discriminator) kolonunu yapılandırmak için kullanılır. Bu kolon, her bir türe özgü verilerin aynı tabloda saklanmasını sağlar ve hangi türün hangi satıra ait olduğunu belirler.
         #endregion
+        #region HasNoKey
+        //Normal şartlarda tüm entitylerin bir PK olması gerekir. Ancak bazı durumlarda key'siz entity'ler tanımlamak isteyebiliriz. Örneğin, raporlama amaçlı veya view'lar üzerinden veri çekmek istediğimizde key'siz entity'ler kullanabiliriz. İşte bu tür durumlarda HasNoKey metodu kullanılır.
+        modelBuilder.Entity<Tester>().HasNoKey();
+        #endregion
+        #region HasIndex
+        //Eğerki bir tabloda index eklemek istiyorsak HasIndex metodunu kullanabiliriz. Index'ler, veritabanı sorgularının performansını artırmak için kullanılır. Sıkça sorgulanan kolonlar üzerinde index oluşturmak, arama işlemlerini hızlandırır.
+        modelBuilder.Entity<Tester>().HasIndex(b => b.X).HasDatabaseName("IX_Blog_Title");
+        #endregion
+        #region HasQueryFilter
+        //Globel Query Filter tanımlamak için kullanılır. Belirli bir entity için tüm sorgularda otomatik olarak uygulanacak filtreler tanımlamamıza olanak sağlar. Örneğin, soft delete (yumuşak silme) senaryolarında sıkça kullanılır.
+        modelBuilder.Entity<Blog>().HasQueryFilter(b => !EF.Property<bool>(b, "IsDeleted"));
+        #endregion
 
 
     }
