@@ -6,7 +6,6 @@ using System.Reflection.Emit;
 ETicaretDbContext dbContext = new();
 Console.WriteLine(nameof(Blog));
 
-
 #region OnModelCreating
 //İlk akla gelen metot OnModelCreating metodudur. Bir modelin yaratılışı ile ilgili tüm configleri burada gerçekleştiriyoruz.
 
@@ -47,6 +46,9 @@ Console.WriteLine(nameof(Blog));
 //Entityler arasından birden fazla ilişki varsa eğer bu ilişkilerin hangi navigation property'leri üzerinden kurulacağını belirtmek için kullanılır.
 #endregion
 #endregion
+#region Composite Key
+//Birden fazla kolondan oluşan primary key tanımlamak için kullanılır.
+#endregion
 
 
 
@@ -55,6 +57,7 @@ public class ETicaretDbContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<Post> Posts { get; set; }
+    public DbSet<Tester> Testers { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
@@ -95,6 +98,7 @@ public class ETicaretDbContext : DbContext
         modelBuilder.Entity<Blog>().Property(b => b.Title).HasMaxLength(200);
         #endregion
         #region HasPrecision
+        //Bu metod, ondalıklı sayılar için toplam basamak sayısını ve ondalık basamak sayısını belirlemenizi sağlar. Örneğin, bir fiyat alanı için kullanılabilir.
         modelBuilder.Entity<Blog>().Property(b => b.Title).HasPrecision(18, 2);
         #endregion
         #region HasComment
@@ -103,6 +107,40 @@ public class ETicaretDbContext : DbContext
         #region ConcurrencyToken
         modelBuilder.Entity<Blog>().Property(b => b.Concurency).IsConcurrencyToken();
         #endregion
+        #region Composite Key
+        //modelBuilder.Entity<Blog>().HasKey(b => new { b.KeyKolonu, b.Title });
+        #endregion
+        #region HasDefaultValue
+        //Default değer atamak için kullanılır.
+        modelBuilder.Entity<Blog>().Property(b => b.Concurency).HasDefaultValue(1);
+        #endregion
+        #region HasDefaultValueSql
+        //HasDefaultValueSql metodu, bir kolon için varsayılan değeri SQL ifadesi olarak belirlemenizi sağlar. Bu, özellikle tarih/saat gibi dinamik değerler veya veritabanı tarafından hesaplanan değerler için kullanışlıdır.
+        modelBuilder.Entity<Blog>().Property<DateTime>("CreatedDate").HasDefaultValueSql("GETDATE()").IsRequired();
+        #endregion
+        #region HasComputedColumnSql
+        //HasComputedColumnSql metodu, bir kolonun değerinin veritabanı tarafından hesaplanacağını belirtmek için kullanılır. Bu, genellikle diğer kolonların değerlerine dayalı olarak hesaplanan kolonlar için kullanılır.
+        modelBuilder.Entity<Tester>().Property(t => t.Y).HasComputedColumnSql("[X] * 2");
+        #endregion
+        #region HasConstraintName
+        //HasConstraintName metodu, bir ilişki için oluşturulan yabancı anahtar kısıtlamasının adını belirlemenizi sağlar. Bu, veritabanı şemasında daha anlamlı ve yönetilebilir kısıtlama adları kullanmak istediğinizde faydalıdır.
+        modelBuilder.Entity<Post>()
+            .HasOne(p => p.Blog)
+            .WithMany(b => b.Posts)
+            .HasForeignKey(p => p.BlogId)
+            .HasConstraintName("FK_Post_Blog_CustomName");
+        #endregion
+        #region HasData
+        //HasData metodu, başlangıç verilerini (seed data) veritabanına eklemek için kullanılır. Bu, uygulama başlatıldığında veya veritabanı oluşturulduğunda belirli verilerin otomatik olarak eklenmesini sağlar.
+        modelBuilder.Entity<Blog>().HasData(
+            new Blog { KeyKolonu = 1, Title = "First Blog", Description = "This is the first blog", Concurency = 1 },
+            new Blog { KeyKolonu = 2, Title = "Second Blog", Description = "This is the second blog", Concurency = 1 }
+        );
+        #endregion
+        #region HasDiscriminator
+        //HasDiscriminator metodu, tablo başına sınıf hiyerarşisi (Table-per-Hierarchy, TPH) stratejisini kullanarak kalıtım yapılan entity'ler için ayrımcı (discriminator) kolonunu yapılandırmak için kullanılır. Bu kolon, her bir türe özgü verilerin aynı tabloda saklanmasını sağlar ve hangi türün hangi satıra ait olduğunu belirler.
+        #endregion
+
 
     }
 
@@ -123,7 +161,8 @@ public class Blog
     [Comment("Açıklama alanı")]
     public string? Description { get; set; }
     [ConcurrencyCheck]
-    public  int Concurency { get; set; }
+    public int Concurency { get; set; }
+
 }
 
 public class Post
@@ -134,4 +173,12 @@ public class Post
     public int BlogId { get; set; }
 
     public Blog Blog { get; set; }
+}
+
+
+public class Tester
+{
+    public int Id { get; set; }
+    public int X { get; set; }
+    public int Y { get; set; }
 }

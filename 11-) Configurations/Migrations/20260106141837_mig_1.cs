@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -19,7 +20,8 @@ namespace _11___Configurations.Migrations
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, precision: 18, scale: 2, nullable: false, comment: "Blog başlığı"),
                     RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Açıklama alanı"),
-                    Concurency = table.Column<int>(type: "int", nullable: false)
+                    Concurency = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
