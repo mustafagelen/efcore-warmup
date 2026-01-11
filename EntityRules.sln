@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13-) SeperateConfiguraiton"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "14-) DataSeeding", "14-) DataSeeding\14-) DataSeeding.csproj", "{ABCFA961-79E3-402D-A94C-BE212CB7A800}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "15-) TablePerHierarchy", "15-) TablePerHierarchy\15-) TablePerHierarchy.csproj", "{A39FB6F4-7260-422E-AF9D-AACE218CFA16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{ABCFA961-79E3-402D-A94C-BE212CB7A800}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABCFA961-79E3-402D-A94C-BE212CB7A800}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABCFA961-79E3-402D-A94C-BE212CB7A800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A39FB6F4-7260-422E-AF9D-AACE218CFA16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A39FB6F4-7260-422E-AF9D-AACE218CFA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A39FB6F4-7260-422E-AF9D-AACE218CFA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A39FB6F4-7260-422E-AF9D-AACE218CFA16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
