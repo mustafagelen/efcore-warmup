@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace _16___TablePerType.Migrations
 {
     [DbContext(typeof(ETicaretDbContext))]
-    [Migration("20260111183257_mig_1")]
+    [Migration("20260111194219_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -23,13 +23,16 @@ namespace _16___TablePerType.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.HasSequence("PersonSequence");
+
             modelBuilder.Entity("Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEXT VALUE FOR [PersonSequence]");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -39,9 +42,9 @@ namespace _16___TablePerType.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persons", (string)null);
+                    b.ToTable((string)null);
 
-                    b.UseTptMappingStrategy();
+                    b.UseTpcMappingStrategy();
                 });
 
             modelBuilder.Entity("Customer", b =>
@@ -51,7 +54,7 @@ namespace _16___TablePerType.Migrations
                     b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Employee", b =>
@@ -61,7 +64,7 @@ namespace _16___TablePerType.Migrations
                     b.Property<string>("Departent")
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Plumber", b =>
@@ -71,34 +74,7 @@ namespace _16___TablePerType.Migrations
                     b.Property<string>("Branch")
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Plumbers", (string)null);
-                });
-
-            modelBuilder.Entity("Customer", b =>
-                {
-                    b.HasOne("Person", null)
-                        .WithOne()
-                        .HasForeignKey("Customer", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Employee", b =>
-                {
-                    b.HasOne("Person", null)
-                        .WithOne()
-                        .HasForeignKey("Employee", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Plumber", b =>
-                {
-                    b.HasOne("Employee", null)
-                        .WithOne()
-                        .HasForeignKey("Plumber", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Plumbers");
                 });
 #pragma warning restore 612, 618
         }

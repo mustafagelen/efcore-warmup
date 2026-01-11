@@ -9,6 +9,10 @@ ETicaretDbContext dbContext = new();
 //Entityler DbSet olarak bildirilmelidir.
 #endregion
 
+#region Table Per Concrete Nedir
+//Sadece concrete somut olan entitylere karşılık bir tablo oluşturacak davranış modelidir. 
+//TPC TPT nin daha performanslı modelidir.
+#endregion
 
 Console.WriteLine("Done");
 public class ETicaretDbContext : DbContext
@@ -22,7 +26,7 @@ public class ETicaretDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
-        optionsBuilder.UseSqlServer("Server=localhost;Database=TablePerHierarchy;User Id=sa;Password=Mg123456;TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer("Server=localhost;Database=TablePerType;User Id=sa;Password=Mg123456;TrustServerCertificate=True;");
         //Provider
         //Connection String
         //Layz Loading
@@ -31,16 +35,19 @@ public class ETicaretDbContext : DbContext
     override protected void OnModelCreating(ModelBuilder modelBuilder)
     {
         //TPT uygulayabilmek için bu config yapılmalı
-        modelBuilder.Entity<Person>().ToTable("Persons");
-        modelBuilder.Entity<Employee>().ToTable("Employees");
-        modelBuilder.Entity<Customer>().ToTable("Customers");
-        modelBuilder.Entity<Plumber>().ToTable("Plumbers");
+        //modelBuilder.Entity<Person>().ToTable("Persons");
+        //modelBuilder.Entity<Employee>().ToTable("Employees");
+        //modelBuilder.Entity<Customer>().ToTable("Customers");
+        //modelBuilder.Entity<Plumber>().ToTable("Plumbers");
+
+        modelBuilder.Entity<Person>().UseTpcMappingStrategy();
+
     }
 
 
 }
 
-public class Person
+ public abstract class Person
 {
     public int Id { get; set; }
     public string? Name { get; set; }
