@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 ETicaretDbContext dbContext = new();
 
 #region Generated Values
@@ -33,6 +34,17 @@ dbContext.SaveChanges();
 //Primary Key her bir satırı kimlik olarak tanımlayan sütun veya sütunlar kümesidir.
 //Identity yalnızca otomatik artan tamsayı türündeki birincil anahtarlar (primary keys) için kullanılır.
 //Bu ikisi default olarak birlikte kullanılır. Ancak bu davranışı değiştirmek mümkündür.
+#endregion
+#region DatabaseGenerated Attribute
+//DatabaseGenerated Attribute, Entity Framework'te bir varlık (entity) sınıfının özelliklerine (properties)
+//uygulanabilen bir özniteliktir. Bu öznitelik, belirli bir özelliğin veritabanı tarafından nasıl yönetileceğini belirtmek için kullanılır.
+//Bir kolonda değer üretilmeyecekse none olarak işaretlenir.
+
+#region DatabaseGeneratedOption.Identity
+//Identity, birincil anahtar (primary key) sütunları için kullanılır ve veritabanı tarafından otomatik olarak artan değerler üretir.
+//Sayısal türdeki sütunlar için yaygın olarak kullanılır.
+//Sayısal tür değilse şu kullanılır: .HasDefaultValueSql("NEWID()")
+#endregion
 #endregion
 
 Console.WriteLine("Done");
@@ -81,8 +93,12 @@ public class Blog
 
 public class Post
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
     public string Content { get; set; }
+
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int PostId { get; set; }
 
     public int BlogId { get; set; }
 
