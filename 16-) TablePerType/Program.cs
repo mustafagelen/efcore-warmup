@@ -8,7 +8,6 @@ ETicaretDbContext dbContext = new();
 //Her generate edilen tablolar 1-1 ilişkiye sahip olacak şekilde bütün entityler için tablolar oluşturuluyor.
 //Entityler DbSet olarak bildirilmelidir.
 #endregion
-
 #region Table Per Concrete Nedir
 //Sadece concrete somut olan entitylere karşılık bir tablo oluşturacak davranış modelidir. 
 //TPC TPT nin daha performanslı modelidir.
