@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "15-) TablePerHierarchy", "1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "16-) TablePerType", "16-) TablePerType\16-) TablePerType.csproj", "{B458AA6B-9EDA-402D-A6DE-DA02ADB70196}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "17-) Indexes", "17-) Indexes\17-) Indexes.csproj", "{0542E8C0-DA36-4459-BAF9-092A36A1ADC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{B458AA6B-9EDA-402D-A6DE-DA02ADB70196}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B458AA6B-9EDA-402D-A6DE-DA02ADB70196}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B458AA6B-9EDA-402D-A6DE-DA02ADB70196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0542E8C0-DA36-4459-BAF9-092A36A1ADC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0542E8C0-DA36-4459-BAF9-092A36A1ADC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0542E8C0-DA36-4459-BAF9-092A36A1ADC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0542E8C0-DA36-4459-BAF9-092A36A1ADC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
